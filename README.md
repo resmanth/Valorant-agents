@@ -3,8 +3,7 @@
 
 ##  Overview
 
-Valo-Stats & Skins Explorer is a web application that allows users to explore Valorant skins and game-related data using a public API. The app provides features like searching, filtering, sorting, and saving favorite skins.
-
+Valo-Stats & Agents Explorer is a web application that allows users to explore Valorant agents and game-related data using a public API. The app provides features like searching, filtering, and viewing detailed information about agents, including their abilities, roles, and visuals.
 ##  Features
 
 * Search agents by name
