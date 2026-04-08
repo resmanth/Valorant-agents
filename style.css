@@ -1,8 +1,14 @@
+
+@import url('https://fonts.cdnfonts.com/css/valorant');
+
+                
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box; 
      background-color: #0f1a24;
+    font-family: 'VALORANT', sans-serif;
+     /* background-color: white; */
 }
 
 #header{
@@ -12,7 +18,19 @@
     position: fixed;
     margin-bottom: 5vh;
     display: flex;
+    
+}
+.logo{
+    width: 15vw;
+    /* background-color: blue; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.logo-name{
+    font-size: 2.5em;
+    color: white;
 }
 
 input{
@@ -59,10 +77,6 @@ input{
     border-radius: 30vh;
 } */
 
-.logo{
-    width: 10vw;
-    /* background-color: blue; */
-}
 
 
 body{
@@ -100,7 +114,7 @@ body{
 
 .name{
     text-align: center;
-    color: red;
+    color: white;
     padding: 10px 0;
 }
 .box{
