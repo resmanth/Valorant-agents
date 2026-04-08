@@ -64,6 +64,7 @@ fetchskins();
 const btn = document.getElementById("input");
 
 btn.addEventListener("input", async function () {
+  // const display = document.getElementById("displayy");
   const input = document.getElementById("input");
   const val = input.value.toLocaleLowerCase();
   try {
@@ -75,13 +76,15 @@ btn.addEventListener("input", async function () {
     const result = data.filter((x) => {
       return x.displayName.toLowerCase().includes(val);
     });
-    if( val!=''){
+    if (val != "") {
       result.sort((a, b) =>
         a.displayName.toLowerCase().localeCompare(b.displayName.toLowerCase()),
       );
     }
-   
+
     console.log(result);
+    
+
     for (let i of result) {
       const box = document.createElement("div");
       const image_div = document.createElement("div");
@@ -121,41 +124,31 @@ btn.addEventListener("input", async function () {
   }
 });
 
-
-
-
-
 const sort = document.getElementById("sort-btn");
 
+sort.addEventListener("change", async function () {
+  const val = sort.value;
 
-sort.addEventListener("change", async function(){
-
-
-  const val = sort.value
-  
-  try{
+  try {
     let res = await fetch("https://valorant-api.com/v1/agents");
     let dataa = await res.json();
     let con = document.getElementById("container");
-    let result = dataa.data
-    console.log(result)
+    let result = dataa.data;
+    console.log(result);
 
-    if (val === 'A-Z') {
+    if (val === "A-Z") {
       result.sort((a, b) =>
-        a.displayName.toLowerCase().localeCompare(b.displayName.toLowerCase())
+        a.displayName.toLowerCase().localeCompare(b.displayName.toLowerCase()),
       );
     } else {
       result.sort((a, b) =>
-        b.displayName.toLowerCase().localeCompare(a.displayName.toLowerCase())
+        b.displayName.toLowerCase().localeCompare(a.displayName.toLowerCase()),
       );
     }
 
-    
-  
     con.innerHTML = "";
 
-
-    for (let i of result ) {
+    for (let i of result) {
       const box = document.createElement("div");
       const image_div = document.createElement("div");
       const img = document.createElement("img");
@@ -188,15 +181,100 @@ sort.addEventListener("change", async function(){
       box.appendChild(image_div);
       box.appendChild(name);
       con.appendChild(box);
-
     }
+  } catch (err) {
+    return err;
+  }
+});
 
-  }catch(err){
-    return (err)
-      
+const filter = document.getElementById("filter-btn");
+
+filter.addEventListener("change", async function () {
+  const val = filter.value;
+  // console.log(val);
+
+  try {
+    let res = await fetch("https://valorant-api.com/v1/agents");
+    let dataa = await res.json();
+    let con = document.getElementById("container");
+    let result = dataa.data;
+    let filtered = result;
+
+    if (val === "a") {
+      filtered =result.filter((x) => {
+        if (x.role.displayName == "Controller") {
+          return true;
+        }
+        return false;
+      });
     }
+     else if (val === "b") {
+      filtered =result.filter((x) => {
+        if (x.role.displayName == "Initiator") {
+          return true;
+        }
 
-})
+        return false;
+      });
+    } 
+    else if (val === "c") {
+     filtered =result.filter((x) => {
+        if (x.role.displayName == "Sentinel") {
+          return true;
+        }
 
+        return false;
+      });
+    } 
+    else if (val === "d") {
+      filtered =result.filter((x) => {
+        if (x.role.displayName == "Duelist") {
+          return true;
+        }
 
+        return false;
+      });
+    }
+    // console.log(filtered)
+    // console.log("lmao")
 
+    con.innerHTML = "";
+
+    for (let i of filtered) {
+      const box = document.createElement("div");
+      const image_div = document.createElement("div");
+      const img = document.createElement("img");
+
+      const name = document.createElement("h1");
+      name.className = "name";
+      img.className = "im";
+
+      image_div.className = "img";
+      box.className = "box";
+
+      img.src = i.fullPortrait;
+      name.innerText = i.displayName;
+      img.style.background = `
+                linear-gradient(
+                    
+                    #${i.backgroundGradientColors[0]},
+                    #${i.backgroundGradientColors[1]},
+                    #${i.backgroundGradientColors[2]},
+                    #${i.backgroundGradientColors[3]}
+                ),
+                url(${i.background})
+                `;
+      img.style.backgroundBlendMode = "overlay";
+      img.style.backgroundSize = "cover";
+      img.style.backgroundPosition = "center";
+
+      image_div.appendChild(img);
+
+      box.appendChild(image_div);
+      box.appendChild(name);
+      con.appendChild(box);
+    }
+  } catch (err) {
+    return err;
+  }
+});
